@@ -10,7 +10,7 @@ pipelines:
         execution:
           onExecute:
             - echo "running test for branch {{gitBranch}}"
-            - pushd $res_appRepo_resourcePath
+            - pushd $res_tw_multibranch_repo_resourcePath
             - ls -latr
             - popd
 
