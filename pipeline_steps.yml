@@ -1,0 +1,25 @@
+pipelines:
+  - name: multibranch_example
+    steps:
+      - name: mb_step_1
+        type: Bash
+        configuration:
+          affinityGroup: together
+          inputResources:
+            - name: tw_multibranch_repo
+        execution:
+          onExecute:
+            - echo "running test for branch {{gitBranch}}"
+            - pushd $res_appRepo_resourcePath
+            - ls -latr
+            - popd
+
+      - name: mb_step_2
+        type: Bash
+        configuration:
+          affinityGroup: together
+          inputSteps:
+            - name: mb_step_1
+        execution:
+          onExecute:
+            - echo "building {{gitBranch}}"
