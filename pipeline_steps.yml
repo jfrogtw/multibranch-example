@@ -23,3 +23,13 @@ pipelines:
         execution:
           onExecute:
             - echo "building {{gitBranch}}"
+
+      - name: mb_step_3
+        type: Bash
+        configuration:
+          affinityGroup: together
+          inputSteps:
+            - name: mb_step_2
+        execution:
+          onExecute:
+            - echo "building {{gitBranch}}"
